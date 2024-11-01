@@ -1,0 +1,30 @@
+-- Create a screen GUI for loading
+local screenGui = Instance.new("ScreenGui", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+local textLabel = Instance.new("TextLabel", screenGui)
+
+-- Customize the loading message
+textLabel.Text = "Loading TDS Script..."
+textLabel.Size = UDim2.new(0.3, 0, 0.1, 0)
+textLabel.Position = UDim2.new(0.35, 0, 0.45, 0)
+textLabel.TextScaled = true
+textLabel.BackgroundColor3 = Color3.new(0, 0, 0)
+textLabel.TextColor3 = Color3.new(1, 1, 1)
+
+-- Wait a few seconds before loading the script
+wait(2)
+
+-- Load and execute the external script
+local success, errorMessage = pcall(function()
+    loadstring(game:HttpGet("https://your-link-to-script-here", true))()
+end)
+
+-- Remove the loading message and provide feedback
+if success then
+    textLabel.Text = "TDS Script loaded successfully!"
+else
+    textLabel.Text = "Failed to load TDS Script. Check output for details."
+end
+
+-- Optionally, hide the label after a few seconds
+wait(3)
+screenGui:Destroy()
